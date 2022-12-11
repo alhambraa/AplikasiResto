@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.io.IOException;
+import java.text.DecimalFormat;
 
 public class MenuSpecial {
     /**
@@ -16,6 +17,7 @@ public class MenuSpecial {
             PorsiKambing
         ;
         String NamaPemesan;
+        DecimalFormat df = new DecimalFormat("#.##");
 
         System.out.println("Aplikasi Resto");
         System.out.println("===============================\n");
@@ -48,8 +50,9 @@ public class MenuSpecial {
         PorsiKwetiaw = input.nextInt();
         System.out.print("Kambing Guling Spesial \t= ");
         PorsiKambing = input.nextInt();
-        System.out.println("\n\n");
+        System.out.println("\n");
 
+        breakConsule();
         System.out.println("Selamat menikmati pesanan anda...");
         System.out.println("");
         
@@ -60,16 +63,33 @@ public class MenuSpecial {
         double KambingGuling = PorsiKambing*98765.43;
         double TotalPembelian = NasiGoreng+AyamBakar+SteakSirloin+KwetiawSiram+KambingGuling;
         double DiskonPembelian = TotalPembelian*0.1;
+        double TotalPembayaran = TotalPembelian - DiskonPembelian;
+        double PembagianPembayaran = TotalPembayaran/JumlahPesanan;
 
         System.out.println("Pembelian :\n");
-        System.out.printf("1. Nasi Goreng Spesial \t\t" +PorsiNasi+ " porsi* Rp. 9999,99 = \t Rp. %.2f\n",NasiGoreng);
-        System.out.printf("2. Ayam Bakar Spesial \t\t" +PorsiAyam+ " porsi* Rp. 9999,99 = \t Rp. %.2f\n",AyamBakar);
-        System.out.printf("3. Steak Sirloin Spesial \t" +PorsiSteak+ " porsi* Rp. 9999,99 = \t Rp. %.2f\n",SteakSirloin);
-        System.out.printf("4. Kwetiaw Siram Spesial \t" +PorsiKwetiaw+ " porsi* Rp. 9999,99 = \t Rp. %.2f\n",KwetiawSiram);
-        System.out.printf("5. Kambing Guling Spesial \t" +PorsiKambing+ " porsi* Rp. 9999,99 = \t Rp. %.2f\n",KambingGuling," +");
-        System.out.println("======================================================================");
-        System.out.printf("Total Pembelian \t\t\t\t\t =  Rp. "+ TotalPembelian);
-        System.out.printf("Disc. 10% (Masa Promosi) \t\t =  ");
-        System.out.println("======================================================================");
+        System.out.println("1. Nasi Goreng Spesial \t\t" +PorsiNasi+ " porsi * Rp. 9999,99  = \t Rp. "+df.format(NasiGoreng));
+        System.out.println("2. Ayam Bakar Spesial \t\t" +PorsiAyam+ " porsi * Rp. 12345,67 = \t Rp. "+df.format(AyamBakar));
+        System.out.println("3. Steak Sirloin Spesial \t" +PorsiSteak+ " porsi * Rp. 21108,40 = \t Rp. "+df.format(SteakSirloin));
+        System.out.println("4. Kwetiaw Siram Spesial \t" +PorsiKwetiaw+ " porsi * Rp. 13579,13 = \t Rp. "+df.format(KwetiawSiram));
+        System.out.println("5. Kambing Guling Spesial \t" +PorsiKambing+ " porsi * Rp. 98765,45 = \t Rp. "+df.format(KambingGuling));
+        System.out.println("============================================================================== +");
+        System.out.println("Total Pembelian \t\t\t\t       = \t Rp. "+df.format(TotalPembelian));
+        System.out.println("Disc. 10% (Masa Promosi) \t\t\t       = \t Rp. "+df.format(DiskonPembelian));
+        System.out.println("============================================================================== -");
+        System.out.println("Total Pembelian setelah disc 10% \t\t\t=\tRp. "+df.format(TotalPembayaran));
+        System.out.println();
+        System.out.println("Pembelian per orang (untuk "+JumlahPesanan+ " orang)\t\t\t= \tRp. "+df.format(PembagianPembayaran));
+        System.out.println();
+        System.out.println("Terima Kasih atas Kunjungan Anda....");
+        System.out.println("...Tekan Enter untuk keluar....");
+        breakConsule();
+    }
+
+    private static void breakConsule() {
+        try{
+            System.in.read();
+        }catch(IOException e){
+            e.printStackTrace();
+        }
     }
 }
